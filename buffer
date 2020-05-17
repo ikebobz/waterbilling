@@ -1,0 +1,15 @@
+SELECT [ZONE], SUM(METER_READ) AS CONSUMPTION FROM RESIDENT INNER JOIN READINGS ON (RESIDENT.RUID=READINGS.RUID AND READ_DATE BETWEEN {?START} AND {?END}) GROUP BY [ZONE]
+
+ReuseParameterValuesOnRefresh="True"
+
+
+if (buffer.insertRecord(query))
+        {
+            status.Text = "Update successful";
+            status.Visible = true;
+        }
+        else
+        {
+            status.Text = "Failed";
+            status.Visible = true;
+        }
